@@ -1,0 +1,142 @@
+.leaderboardContainer {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.tabActive {
+  background-color: #000;
+  color: #fff;
+}
+
+.topThree {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.topCard {
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  flex: 1;
+}
+
+.topCard img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #000;
+}
+
+.topCard img[src*='dicebear'] {
+  background-color: #fff;
+}
+
+.topCard .name {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.topCard .points {
+  color: orange;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.topCard .rank {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.list {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+.userDetails {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userDetails img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userDetails img[src*='dicebear'] {
+  background-color: #fff;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo .name {
+  font-weight: 600;
+}
+
+.userInfo .username {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.score.up {
+  color: green;
+}
+
+.score.down {
+  color: red;
+}

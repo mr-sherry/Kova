@@ -1,0 +1,45 @@
+/* AboutCard.module.css */
+
+.card {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  object-fit: cover;
+  margin: 0 auto 1rem auto;
+  border: 4px solid #6366f1; /* Example primary color */
+}
+
+.name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}

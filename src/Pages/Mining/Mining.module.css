@@ -1,0 +1,307 @@
+/* Container */
+.appContainer {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 15px 40px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.userInfo h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.userInfo span {
+  font-size: 0.9rem;
+  color: #555;
+}
+.btn {
+  padding: 10px 14px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.points {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Timer */
+.timer {
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 0.04em;
+}
+
+/* Progress Bar */
+.progressBarContainer {
+  background-color: #ddd;
+  border-radius: 20px;
+  height: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 35px auto;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px #aaa;
+}
+
+.progressBarFill {
+  background-color: #000;
+  height: 100%;
+  border-radius: 20px 0 0 20px;
+  transition: width 0.5s ease;
+}
+
+/* Claim Button */
+.claimButton {
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  padding: 14px 34px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 70%;
+  max-width: 260px;
+  margin: 0 auto 30px auto;
+  position: relative;
+  overflow: visible;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.claimButton:hover {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.claimButton:active {
+  transform: scale(0.95);
+}
+
+/* Coin Animation */
+.coinAnimation {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  opacity: 0;
+  font-size: 1.4rem;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Show coin animation on button active */
+.claimButton:active .coinAnimation {
+  transform: translateY(-150%) scale(1.2);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Daily Streak */
+.streakContainer {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.streakContainer h3 {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.streakRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.streakDot {
+  width: 18px;
+  height: 18px;
+  background-color: #ddd;
+  border-radius: 50%;
+  box-shadow: inset 0 0 4px #bbb;
+  transition: background-color 0.3s ease;
+}
+
+.streakDot.active {
+  background-color: #000;
+  box-shadow: none;
+}
+
+/* Rewards Container */
+.rewardsContainer {
+  max-width: 420px;
+  margin: 0 auto 35px auto;
+  border: 1px solid #000;
+  border-radius: 15px;
+  padding: 15px 20px;
+  background-color: #f9f9f9;
+}
+
+.rewardsContainer h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.reward {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+  color: #111;
+}
+
+.reward:last-child {
+  border-bottom: none;
+}
+
+/* Leaderboard */
+.leaderboard {
+  margin-top: 10px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 20px;
+  border: 1px solid #000;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+  user-select: none;
+}
+
+.leaderboard h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #000;
+}
+
+.leaderboard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  color: #111;
+}
+
+.leaderboard li:last-child {
+  border-bottom: none;
+}
+
+.lbUser {
+  font-weight: 600;
+}
+
+.lbPoints {
+  font-weight: 700;
+  color: #000;
+}
+
+/* Sparkles - subtle animated dots */
+.sparkle {
+  position: fixed;
+  top: 10%;
+  left: 15%;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #000 60%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.12;
+  animation: sparkleAnim 3s infinite ease-in-out alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+.timerClaimRow {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Align vertically */
+  gap: 2rem; /* Space between timer and button */
+  flex-wrap: wrap; /* Wrap on small screens */
+  margin-bottom: 2rem;
+}
+
+/* Coin animation keyframes */
+@keyframes coinMove {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sparkleAnim {
+  0% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1.6);
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .appContainer {
+    padding: 15px 12px 30px;
+  }
+
+  .timer {
+    font-size: 2.2rem;
+  }
+
+  .claimButton {
+    max-width: 100%;
+  }
+
+  .progressBarContainer {
+    max-width: 100%;
+  }
+
+  .leaderboard,
+  .rewardsContainer {
+    max-width: 100%;
+  }
+}
