@@ -1,0 +1,2 @@
+# Kova
+new mining project
