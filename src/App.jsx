@@ -17,12 +17,13 @@ function App() {
         minHeight: "100vh", // recommended for full view height
     };
 
+
+
     return (
         <div style={layoutStyle}>
             <FirebaseProvider>
                 <Header />
                 <Outlet />
-
             </FirebaseProvider>
         </div>
     )

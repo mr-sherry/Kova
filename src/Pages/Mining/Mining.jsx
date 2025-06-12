@@ -10,22 +10,24 @@ export default function Mining() {
     const [playLottie, setPlayLottie] = useState(false);
     console.log("🚀 ~ Mining ~ playLottie:", playLottie)
     const [showToast, setShowToast] = useState(false);
+    console.log("🚀 ~ Mining ~ showToast:", showToast)
 
     const navigate = useNavigate();
     const firebase = useFirebase()
 
     const handleClaim = () => {
         setPlayLottie(false);
+
         setTimeout(() => {
             setPlayLottie(true);
+            setShowToast(true);
         }, 10);
 
-        setShowToast(true);
 
         setTimeout(() => {
             setPlayLottie(false);
             setShowToast(false);
-        }, 2500);
+        }, 3000);
     };
 
 
@@ -33,8 +35,6 @@ export default function Mining() {
         if (!firebase.user) {
             navigate('/login')
         }
-
-
     }, [firebase.user])
 
     return (
