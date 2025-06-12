@@ -3,6 +3,7 @@ import styles from './Header.module.css';
 import Sidebar from '../SideBar/SideBar'; // Adjust path as needed
 import Icon from '../../assests/IconDark.svg'
 import Text from '../../assests/TextDark.svg'
+import { NavLink } from 'react-router-dom';
 
 
 export default function Header() {
@@ -11,8 +12,11 @@ export default function Header() {
 
             <div>
                 <div className={styles.logo}>
-                    <img src={Icon} alt="" style={{ width: '55px' }} />
-                    <img src={Text} alt="" style={{ width: '90px' }} />
+                    <NavLink to={'/'}>
+
+                        <img src={Icon} alt="" style={{ width: '55px' }} />
+                        <img src={Text} alt="" style={{ width: '90px' }} />
+                    </NavLink>
                 </div>
                 <p className={styles.slogan}>Sync Your Efforts, Multiply Your Rewards.</p>
 

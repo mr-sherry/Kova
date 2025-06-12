@@ -10,6 +10,7 @@ export default function Sidebar() {
 
     const handleLogout = () => {
         firebase.logout()
+        setOpen(false)
     }
 
     return (
@@ -49,22 +50,22 @@ export default function Sidebar() {
                 <nav className={styles.nav}>
                     {firebase.user ? (
                         <>
-                            <NavLink to="/">🏠 Home</NavLink>
-                            <NavLink className={styles.disabled}>📜 History (Soon)</NavLink>
-                            <NavLink className={styles.disabled}>🎯 Streak (Soon)</NavLink>
-                            <NavLink className={styles.disabled}>🎁 Rewards (Soon)</NavLink>
-                            <NavLink>⚙️ Settings</NavLink>
-                            <NavLink>🏆 Leaderboard</NavLink>
-                            <NavLink>👨‍💼 About Us</NavLink>
-                            <NavLink className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to="/">🏠 Home</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📜 History (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🎯 Streak (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🎁 Rewards (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>⚙️ Settings</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>🏆 Leaderboard</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>👨‍💼 About Us</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>⛏️ Mining Mechanism</NavLink>
                         </>
                     ) : (
                         <>
-                            <NavLink>👨‍💼 About Us</NavLink>
-                            <NavLink className={styles.disabled}>🏆 Leaderboard (Soon)</NavLink>
-                            <NavLink className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>👨‍💼 About Us</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🏆 Leaderboard (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)}>⛏️ Mining Mechanism</NavLink>
                         </>
                     )}
                 </nav>
