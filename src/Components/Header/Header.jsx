@@ -12,11 +12,9 @@ export default function Header() {
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     console.log("🚀 ~ Header ~ loading:", loading)
-    const navigate = useNavigate()
 
 
     const firebase = useFirebase();
-    console.log("🚀 ~ Header ~ firebase          lkl:", firebase.userLogged)
 
     useEffect(() => {
         const fetchData = async () => {

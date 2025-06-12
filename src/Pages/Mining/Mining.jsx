@@ -2,39 +2,61 @@ import React, { useEffect, useState } from 'react';
 import styles from './Mining.module.css';
 import CircularTimer from '../../Components/progress/CircularTimer';
 import { NavLink, useNavigate } from 'react-router-dom';
-import BtnLoader from '../../Components/Animations/BtnLoader'; // Your Lottie animation component
 import Toast from '../../Components/Toast/Toast';
 import { useFirebase } from '../../Context/UseFirebase';
 
 export default function Mining() {
     const [playLottie, setPlayLottie] = useState(false);
     const [showToast, setShowToast] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(0);
+
 
     const navigate = useNavigate();
     const firebase = useFirebase();
-    console.log("🚀 ~ Login ~ firebasefromining:", firebase.userLogged)
+    // console.log("🚀 ~ Login ~ firebasefromining:", firebase.userLogged)
 
 
-    const handleClaim = () => {
-        setPlayLottie(false);
+    const handleClaim = async () => {
+        // Start Lottie animation
+        setPlayLottie(true);
+        setShowToast(false); // Hide toast in case it's already visible
+        try {
+            if (firebase.userLogged?.uid) {
+                await firebase.updateClaimedTime(firebase.userLogged.uid);
+                const claimed = await firebase.getClaimCooldown(firebase.userLogged.uid);
+                console.log("🚀 ~ handleClaim ~ claimed:", claimed)
 
-        setTimeout(() => {
-            setPlayLottie(true);
-            setShowToast(true);
-        }, 10);
-
-
-        setTimeout(() => {
+                // Wait for the claimed time to successfully update
+                setShowToast(true); // Show success toast
+            } else {
+                console.warn("User not logged in");
+            }
+        } catch (error) {
+            console.error("Failed to update claimedTime:", error);
+            // Optionally show an error toast
+        } finally {
+            // Stop Lottie after a short duration
             setPlayLottie(false);
-            setShowToast(false);
-        }, 3000);
+        }
     };
+
 
 
 
     useEffect(() => {
         if (!firebase.userLogged) {
             navigate('/login')
+        } if (firebase.userLogged?.uid) {
+            const checkCooldown = async () => {
+                if (firebase.userLogged?.uid) {
+                    const ms = await firebase.getClaimCooldown(firebase.userLogged.uid);
+                    setTimeRemaining(ms)
+
+                }
+            };
+            setInterval(() => {
+                checkCooldown();
+            }, 1000);
         }
 
     }, [firebase.userLogged]);
@@ -62,10 +84,10 @@ export default function Mining() {
                 <button
                     className={`${styles.claimButton}`}
                     onClick={handleClaim}
-                    disabled={playLottie}
+                    disabled={timeRemaining > 0}
                 >
                     <>
-                        Sync Now
+                        {timeRemaining > 0 ? 'Wait For Timer...' : 'Sync Now'}
                         <span className={styles.coinAnimation}>🪙</span>
                     </>
                 </button>

@@ -51,21 +51,21 @@ export default function Sidebar() {
                     {firebase.userLogged ? (
                         <>
                             <NavLink onClick={() => setOpen(false)} to="/">🏠 Home</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📜 History (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🎯 Streak (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🎁 Rewards (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)}>⚙️ Settings</NavLink>
-                            <NavLink onClick={() => setOpen(false)}>🏆 Leaderboard</NavLink>
-                            <NavLink onClick={() => setOpen(false)}>👨‍💼 About Us</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)}>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📜 History (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🎯 Streak (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🎁 Rewards (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'}>⚙️ Settings</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/leaderboard'}>🏆 Leaderboard</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/about'}>👨‍💼 About Us</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'}>⛏️ Mining Mechanism</NavLink>
                         </>
                     ) : (
                         <>
-                            <NavLink onClick={() => setOpen(false)}>👨‍💼 About Us</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>🏆 Leaderboard (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)}>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'}>👨‍💼 About Us</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🏆 Leaderboard (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/'}>⛏️ Mining Mechanism</NavLink>
                         </>
                     )}
                 </nav>

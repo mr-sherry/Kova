@@ -16,6 +16,7 @@ import {
     setDoc,
     getDoc,
     serverTimestamp,
+    updateDoc,
 } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -68,6 +69,8 @@ export const FirebaseProvider = ({ children }) => {
                 displayName: username || "",
                 photoURL: user.photoURL || "",
                 createdAt: serverTimestamp(),
+                streak: 0,
+                claimedTime: null,
                 points: 0,
             });
 
@@ -113,6 +116,49 @@ export const FirebaseProvider = ({ children }) => {
     };
 
 
+    // update timestamp of claim on click
+    const updateClaimedTime = async (uid) => {
+        try {
+            const userRef = doc(db, "users", uid);
+            await updateDoc(userRef, {
+                claimedTime: serverTimestamp(),
+            });
+            console.log("✅ Claimed time updated successfully");
+        } catch (error) {
+            console.error("❌ Error updating claimed time:", error.message);
+        }
+    };
+
+
+    // FirebaseContext.js
+
+    // Utility to calculate milliseconds left until next claim
+    const getClaimCooldown = async (uid) => {
+        try {
+            const userRef = doc(db, "users", uid);
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap.exists()) {
+                const data = userSnap.data();
+                const claimedTime = data.claimedTime?.toDate?.();
+
+                if (!claimedTime) return 0;
+
+                const now = new Date();
+                const nextEligible = new Date(claimedTime.getTime() + 1 * 60 * 1000);
+                const remaining = nextEligible - now;
+
+                return remaining > 0 ? remaining : 0;
+            } else {
+                console.warn("User not found for cooldown check.");
+                return 0;
+            }
+        } catch (error) {
+            console.error("❌ Error getting claim cooldown:", error.message);
+            return 0;
+        }
+    };
+
     // Values to share
     const contextValue = {
         userLogged,
@@ -120,7 +166,9 @@ export const FirebaseProvider = ({ children }) => {
         login,
         logout,
         signInWithGoogle,
-        fetchUserData
+        fetchUserData,
+        updateClaimedTime,
+        getClaimCooldown
     };
 
     return (

@@ -104,7 +104,9 @@
 .claimButton:active {
   transform: scale(0.95);
 }
-
+.claimButton:disabled {
+  opacity: 0.2;
+}
 /* Coin Animation */
 .coinAnimation {
   position: absolute;
