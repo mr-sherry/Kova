@@ -5,7 +5,7 @@ import App from './App.jsx'
 import Mining from './Pages/Mining/Mining.jsx'
 import Register from './Pages/Auth/Register.jsx'
 import Login from './Pages/Auth/Login.jsx'
-import Leaderboard from './Pages/LeaderBoard/LeadeBoard.jsx'
+import Leaderboard from './Pages/LeaderBoard/Leaderboard.jsx'
 import About from './Pages/About/About.jsx'
 
 const routes = createBrowserRouter(
