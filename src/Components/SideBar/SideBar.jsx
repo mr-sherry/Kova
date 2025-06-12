@@ -26,7 +26,7 @@ export default function Sidebar() {
 
                 {/* Profile Section */}
                 <div className={styles.profileSection}>
-                    {firebase.user ? (<>
+                    {firebase.userLogged ? (<>
                         <img
                             className={styles.avatar}
                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7VY0eOygTwItzBSfWDPMdCQCEeZqNzGuHw&s"
@@ -48,7 +48,7 @@ export default function Sidebar() {
 
                 {/* Navigation */}
                 <nav className={styles.nav}>
-                    {firebase.user ? (
+                    {firebase.userLogged ? (
                         <>
                             <NavLink onClick={() => setOpen(false)} to="/">🏠 Home</NavLink>
                             <NavLink onClick={() => setOpen(false)} className={styles.disabled}>📜 History (Soon)</NavLink>
@@ -71,7 +71,7 @@ export default function Sidebar() {
                 </nav>
 
                 <div className={styles.authBtnDiv}>
-                    {firebase.user ?
+                    {firebase.userLogged ?
                         (<NavLink to={'/login'}>
 
                             <button className={styles.authBtn} onClick={handleLogout}>Logout</button>

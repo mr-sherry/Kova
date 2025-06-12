@@ -8,12 +8,12 @@ import { useFirebase } from '../../Context/UseFirebase';
 
 export default function Mining() {
     const [playLottie, setPlayLottie] = useState(false);
-    console.log("🚀 ~ Mining ~ playLottie:", playLottie)
     const [showToast, setShowToast] = useState(false);
-    console.log("🚀 ~ Mining ~ showToast:", showToast)
 
     const navigate = useNavigate();
-    const firebase = useFirebase()
+    const firebase = useFirebase();
+    console.log("🚀 ~ Login ~ firebasefromining:", firebase.userLogged)
+
 
     const handleClaim = () => {
         setPlayLottie(false);
@@ -31,11 +31,16 @@ export default function Mining() {
     };
 
 
+
     useEffect(() => {
-        if (!firebase.user) {
+        if (!firebase.userLogged) {
             navigate('/login')
         }
-    }, [firebase.user])
+
+    }, [firebase.userLogged]);
+
+
+
 
     return (
         <div className={styles.appContainer}>

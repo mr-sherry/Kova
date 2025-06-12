@@ -29,7 +29,7 @@ export default function Register() {
 
         try {
             // 1. Sign up
-            const result = await firebase.signUp(email, password);
+            const result = await firebase.signUp(email, password, username);
 
             console.log("✅ Registration successful:", result);
 
@@ -45,19 +45,19 @@ export default function Register() {
     };
 
     useEffect(() => {
-        if (firebase.user) {
+        if (firebase.userLogged) {
             navigate('/')
         }
 
 
-    }, [firebase.user])
+    }, [firebase.userLogged])
 
 
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>Register</h2>
             <form onSubmit={handleClick} className={styles.form}>
-                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" className={styles.input} />
+                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Name" className={styles.input} />
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" className={styles.input} />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" className={styles.input} />
                 <button type="submit" className={styles.submitBtn}>

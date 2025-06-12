@@ -14,7 +14,7 @@ export default function Login() {
     const navigate = useNavigate()
 
     const firebase = useFirebase();
-    console.log("🚀 ~ Login ~ firebase:", firebase.user)
+    // console.log("🚀 ~ Login ~ firebase:", firebase.userLogged)
 
 
     const handleSubmit = async (e) => {
@@ -48,12 +48,12 @@ export default function Login() {
 
 
     useEffect(() => {
-        if (firebase.user) {
+        if (firebase.userLogged) {
             navigate('/')
         }
 
 
-    }, [firebase.user])
+    }, [firebase.userLogged])
 
 
 

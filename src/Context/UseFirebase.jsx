@@ -10,6 +10,13 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
 } from "firebase/auth";
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    serverTimestamp,
+} from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Firebase config
@@ -27,6 +34,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const googleProvider = new GoogleAuthProvider();
+const db = getFirestore(firebaseApp);
 
 // Context
 export const FirebaseContext = createContext(null);
@@ -34,20 +42,43 @@ export const useFirebase = () => useContext(FirebaseContext);
 
 // Provider
 export const FirebaseProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [userLogged, setUserLogged] = useState(null);
 
     // Track auth state
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser || null);
+            setUserLogged(currentUser || null);
         });
         return () => unsubscribe();
     }, []);
 
     // Register with email/password
-    const signUp = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+    const signUp = async (email, password, username) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            if (!user) throw new Error("User creation failed");
+
+            // Firestore logic
+            const userRef = doc(db, "users", user.uid);
+            await setDoc(userRef, {
+                uid: user.uid,
+                email: user.email,
+                displayName: username || "",
+                photoURL: user.photoURL || "",
+                createdAt: serverTimestamp(),
+                points: 0,
+            });
+
+            return userCredential;
+        } catch (error) {
+            console.error("SignUp Error:", error.message);
+            throw error; // bubble up to the caller
+        }
     };
+
+
 
     // Login with email/password
     const login = (email, password) => {
@@ -64,15 +95,32 @@ export const FirebaseProvider = ({ children }) => {
         return signOut(auth);
     };
 
+    const fetchUserData = async (uid) => {
+        try {
+            const userRef = doc(db, "users", uid);
+            const userSnap = await getDoc(userRef);
+
+            if (userSnap.exists()) {
+                return userSnap.data(); // returns user profile object
+            } else {
+                console.warn("User profile not found in Firestore");
+                return null;
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error.message);
+            return null;
+        }
+    };
 
 
     // Values to share
     const contextValue = {
-        user,
+        userLogged,
         signUp,
         login,
         logout,
         signInWithGoogle,
+        fetchUserData
     };
 
     return (
