@@ -13,6 +13,8 @@ export default function Sidebar() {
         setOpen(false)
     }
 
+
+
     return (
         <>
             <div className={styles.hamburger} onClick={() => setOpen(true)}>
@@ -29,12 +31,12 @@ export default function Sidebar() {
                     {firebase.userLogged ? (<>
                         <img
                             className={styles.avatar}
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7VY0eOygTwItzBSfWDPMdCQCEeZqNzGuHw&s"
+                            src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${firebase.fetchedData ? firebase.fetchedData.displayName : ''}`}
                             alt="User Avatar"
                         />
                         <div className={styles.profileSectionInner}>
-                            <h4>Sherry</h4>
-                            <p>💰 1200 pts</p>
+                            <h4>{firebase.fetchedData ? firebase.fetchedData.displayName : ''}</h4>
+                            <p>💰 {firebase.fetchedData ? firebase.fetchedData.points : ''} pts</p>
                         </div>
 
 

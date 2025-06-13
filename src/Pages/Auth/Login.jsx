@@ -9,12 +9,10 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    console.log("🚀 ~ Login ~ loading:", loading)
 
     const navigate = useNavigate()
 
     const firebase = useFirebase();
-    // console.log("🚀 ~ Login ~ firebase:", firebase.userLogged)
 
 
     const handleSubmit = async (e) => {
@@ -41,8 +39,7 @@ export default function Login() {
 
     const handleLoginWithGoogle = async () => {
 
-        const logged = await firebase.signInWithGoogle();
-        console.log("🚀 ~ handleLoginWithGoogle ~ logged:", logged)
+        await firebase.signInWithGoogle();
 
     }
 

@@ -44,11 +44,14 @@ export const useFirebase = () => useContext(FirebaseContext);
 // Provider
 export const FirebaseProvider = ({ children }) => {
     const [userLogged, setUserLogged] = useState(null);
+    const [fetchedData, setFetchedData] = useState(null);
+    const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
     // Track auth state
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUserLogged(currentUser || null);
+            setIsFirebaseReady(true);
         });
         return () => unsubscribe();
     }, []);
@@ -65,6 +68,7 @@ export const FirebaseProvider = ({ children }) => {
             const userRef = doc(db, "users", user.uid);
             await setDoc(userRef, {
                 uid: user.uid,
+                referCode: Date.now(),
                 email: user.email,
                 displayName: username || "",
                 photoURL: user.photoURL || "",
@@ -72,6 +76,7 @@ export const FirebaseProvider = ({ children }) => {
                 streak: 0,
                 claimedTime: null,
                 points: 0,
+                referBy: null
             });
 
             return userCredential;
@@ -89,8 +94,40 @@ export const FirebaseProvider = ({ children }) => {
     };
 
     // Google login
-    const signInWithGoogle = () => {
-        return signInWithPopup(auth, googleProvider);
+    const signInWithGoogle = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+
+            if (!user) throw new Error("Google sign-in failed");
+
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+
+            // 🔥 If the user doesn't exist in Firestore, create a new record
+            if (!userSnap.exists()) {
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    referCode: Date.now(),
+                    email: user.email || "",
+                    displayName: user.displayName || "",
+                    photoURL: user.photoURL || "",
+                    createdAt: serverTimestamp(),
+                    streak: 0,
+                    claimedTime: null,
+                    points: 0,
+                    referBy: null,
+                });
+                console.log("✅ New Google user stored in Firestore");
+            } else {
+                console.log("👤 Google user already exists in Firestore");
+            }
+
+            return result;
+        } catch (error) {
+            console.error("Google Sign-in Error:", error.message);
+            throw error;
+        }
     };
 
     // Logout
@@ -104,6 +141,7 @@ export const FirebaseProvider = ({ children }) => {
             const userSnap = await getDoc(userRef);
 
             if (userSnap.exists()) {
+                setFetchedData(userSnap.data())
                 return userSnap.data(); // returns user profile object
             } else {
                 console.warn("User profile not found in Firestore");
@@ -120,8 +158,12 @@ export const FirebaseProvider = ({ children }) => {
     const updateClaimedTime = async (uid) => {
         try {
             const userRef = doc(db, "users", uid);
+            const userSnap = (await getDoc(userRef)).data()
+
             await updateDoc(userRef, {
                 claimedTime: serverTimestamp(),
+                streak: Number(userSnap.streak) + 1,
+                points: (Number(userSnap.points) + 1.2).toFixed(2)
             });
             console.log("✅ Claimed time updated successfully");
         } catch (error) {
@@ -162,13 +204,15 @@ export const FirebaseProvider = ({ children }) => {
     // Values to share
     const contextValue = {
         userLogged,
+        isFirebaseReady,
+        fetchedData,
         signUp,
         login,
         logout,
         signInWithGoogle,
         fetchUserData,
         updateClaimedTime,
-        getClaimCooldown
+        getClaimCooldown,
     };
 
     return (

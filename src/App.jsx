@@ -1,10 +1,14 @@
 import React from 'react'
-import Mining from './Pages/Mining/Mining'
 import Header from './Components/Header/Header'
 import { Outlet } from 'react-router-dom'
-import { FirebaseProvider } from './Context/UseFirebase';
+import { FirebaseProvider, useFirebase } from './Context/UseFirebase';
+import FullPageLottieLoader from './Components/Animations/FullPageLottieLoader';
 
-function App() {
+
+
+const Layout = () => {
+    const { isFirebaseReady } = useFirebase(); // Access context
+
     const layoutStyle = {
         maxWidth: "480px",
         margin: "0 auto",
@@ -14,16 +18,26 @@ function App() {
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
         userSelect: "none",
         position: "relative",
-        minHeight: "100vh", // recommended for full view height
+        minHeight: "100vh",
     };
 
-
+    if (!isFirebaseReady) return <FullPageLottieLoader />;
 
     return (
         <div style={layoutStyle}>
+            <Header />
+            <Outlet />
+        </div>
+    );
+};
+
+
+function App() {
+
+    return (
+        <div>
             <FirebaseProvider>
-                <Header />
-                <Outlet />
+                <Layout />
             </FirebaseProvider>
         </div>
     )

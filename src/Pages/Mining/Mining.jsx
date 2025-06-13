@@ -4,11 +4,15 @@ import CircularTimer from '../../Components/progress/CircularTimer';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Toast from '../../Components/Toast/Toast';
 import { useFirebase } from '../../Context/UseFirebase';
+import FullPageLottieLoader from '../../Components/Animations/FullPageLottieLoader';
+
 
 export default function Mining() {
     const [playLottie, setPlayLottie] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [timeRemaining, setTimeRemaining] = useState(0);
+    const [fetchedData, setFetchedData] = useState(null)
+
 
 
     const navigate = useNavigate();
@@ -51,30 +55,48 @@ export default function Mining() {
                 if (firebase.userLogged?.uid) {
                     const ms = await firebase.getClaimCooldown(firebase.userLogged.uid);
                     setTimeRemaining(ms)
-
                 }
             };
             setInterval(() => {
                 checkCooldown();
             }, 1000);
+
         }
 
     }, [firebase.userLogged]);
 
 
+    useEffect(() => {
+        const gettingData = async () => {
+            const data = await firebase.fetchUserData(firebase.userLogged.uid)
+            setFetchedData(data)
+        }
+        gettingData();
 
+    }, [firebase.userLogged, showToast]);
+
+    if (!fetchedData) return <FullPageLottieLoader />
 
     return (
         <div className={styles.appContainer}>
+            <div className={styles.header}>
+                <div className={styles.left}>
+                    <h2>Hello, {fetchedData.displayName}</h2>
+                    <span>Start Earning $KOVA</span>
+                </div>
+                <div className={styles.right}>
+                    <div className={styles.points}>💰 {fetchedData.points} $KOVA</div>
+                </div>
+            </div>
             {/* Daily Streak */}
             <div className={styles.streakContainer}>
                 <h3>🔥 Daily Streak</h3>
                 <div className={styles.streakRow}>
                     {Array.from({ length: 7 }).map((_, i) => (
-                        <div key={i} className={`${styles.streakDot} ${i < 3 ? styles.active : ''}`}></div>
+                        <div key={i} className={`${styles.streakDot} ${i < fetchedData.streak ? styles.active : ''}`}></div>
                     ))}
                 </div>
-                <p>3-day streak! Keep going!</p>
+                <p>{fetchedData.streak}-day streak! Keep going!</p>
             </div>
 
             {/* Timer and Claim Button Row */}

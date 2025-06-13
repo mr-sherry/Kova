@@ -29,9 +29,8 @@ export default function Register() {
 
         try {
             // 1. Sign up
-            const result = await firebase.signUp(email, password, username);
+            await firebase.signUp(email, password, username);
 
-            console.log("✅ Registration successful:", result);
 
             // 3. Clear form
             setEmail('');
