@@ -206,7 +206,7 @@ export const FirebaseProvider = ({ children }) => {
                 if (!claimedTime) return 0;
 
                 const now = new Date();
-                const nextEligible = new Date(claimedTime.getTime() + 1 * 60 * 1000);
+                const nextEligible = new Date(claimedTime.getTime() + 24 * 60 * 60 * 1000);
                 const remaining = nextEligible - now;
 
                 return remaining > 0 ? remaining : 0;
