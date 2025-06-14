@@ -17,6 +17,10 @@ import {
     getDoc,
     serverTimestamp,
     updateDoc,
+    collection,
+    where,
+    getDocs,
+    query
 } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -45,6 +49,7 @@ export const useFirebase = () => useContext(FirebaseContext);
 export const FirebaseProvider = ({ children }) => {
     const [userLogged, setUserLogged] = useState(null);
     const [fetchedData, setFetchedData] = useState(null);
+    const selectedId = [1749816806054, 12345678, 87654321, 9876543210];
     const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
     // Track auth state
@@ -56,8 +61,18 @@ export const FirebaseProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
+    const checkReferralCodeExists = async (referCode) => {
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("referCode", "==", referCode));
+        const querySnapshot = await getDocs(q);
+
+        return !querySnapshot.empty; // true if at least one match, false otherwise
+    };
+
+
+
     // Register with email/password
-    const signUp = async (email, password, username) => {
+    const signUp = async (email, password, username, referBy) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -76,7 +91,7 @@ export const FirebaseProvider = ({ children }) => {
                 streak: 0,
                 claimedTime: null,
                 points: 0,
-                referBy: null
+                referBy: referBy
             });
 
             return userCredential;
@@ -93,8 +108,11 @@ export const FirebaseProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     };
 
+
+
     // Google login
     const signInWithGoogle = async () => {
+
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
@@ -103,6 +121,7 @@ export const FirebaseProvider = ({ children }) => {
 
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef);
+            const randomNum = Math.floor(Math.random() * 4);
 
             // 🔥 If the user doesn't exist in Firestore, create a new record
             if (!userSnap.exists()) {
@@ -116,7 +135,7 @@ export const FirebaseProvider = ({ children }) => {
                     streak: 0,
                     claimedTime: null,
                     points: 0,
-                    referBy: null,
+                    referBy: selectedId[randomNum],
                 });
                 console.log("✅ New Google user stored in Firestore");
             } else {
@@ -213,6 +232,7 @@ export const FirebaseProvider = ({ children }) => {
         fetchUserData,
         updateClaimedTime,
         getClaimCooldown,
+        checkReferralCodeExists
     };
 
     return (

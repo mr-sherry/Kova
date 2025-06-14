@@ -14,6 +14,7 @@ const routes = createBrowserRouter(
       <Route path='' element={<Mining />} />
       <Route path='leaderboard' element={<Leaderboard />} />
       <Route path='register' element={<Register />} />
+      <Route path='register/ref/:referId' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='about' element={<About />} />
     </Route>

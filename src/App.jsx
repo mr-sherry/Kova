@@ -7,7 +7,7 @@ import FullPageLottieLoader from './Components/Animations/FullPageLottieLoader';
 
 
 const Layout = () => {
-    const { isFirebaseReady } = useFirebase(); // Access context
+    const firebase = useFirebase();
 
     const layoutStyle = {
         maxWidth: "480px",
@@ -21,7 +21,7 @@ const Layout = () => {
         minHeight: "100vh",
     };
 
-    if (!isFirebaseReady) return <FullPageLottieLoader />;
+    if (!firebase.isFirebaseReady) return <FullPageLottieLoader />;
 
     return (
         <div style={layoutStyle}>

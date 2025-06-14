@@ -69,7 +69,7 @@ export default function Mining() {
     useEffect(() => {
         const gettingData = async () => {
             const data = await firebase.fetchUserData(firebase.userLogged.uid)
-            setFetchedData(data)
+            setFetchedData(data);
         }
         gettingData();
 
@@ -115,6 +115,12 @@ export default function Mining() {
                 </button>
             </div>
 
+            {/* refer Link */}
+            <div className={styles.referalLink}>
+                <h3>🔗Referal Link</h3>
+                <p>{`https://kova-mining.vercel.app/register/ref/${fetchedData.referCode}`}</p>
+            </div>
+
 
             {/* Notification Toast */}
             <Toast show={showToast} message="✅ Claimed Successfully!" duration={2500} />
@@ -138,7 +144,7 @@ export default function Mining() {
 
             {/* Leaderboard Snapshot */}
             <section className={styles.leaderboard}>
-                <h3>Leaderboard</h3>
+                <h3>🏆Leaderboard</h3>
                 <ul>
                     <li>
                         <span className={styles.lbUser}>Alice</span>

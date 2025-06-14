@@ -26,38 +26,6 @@
   margin-left: 8px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  background-color: #fff;
-  margin-bottom: 10px;
-  gap: 1rem;
-  width: 100%;
-  max-width: 1200px;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 60%;
-  min-width: 200px;
-}
-
-.right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1 1 35%;
-  min-width: 120px;
-  gap: 1rem;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
 .points {
   font-weight: 600;
   background-color: #f0f0f0;
