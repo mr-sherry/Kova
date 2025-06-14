@@ -24,8 +24,7 @@ export default function Login() {
         }
         setLoading(true)
         try {
-            const loginresult = await firebase.login(email, password);
-            console.log("🚀 ~ handleSubmit ~ loginresult:", loginresult);
+            await firebase.login(email, password);
             // Optionally handle login success state here
         } catch (error) {
             console.error("Login failed:", error);
