@@ -49,7 +49,7 @@ export const useFirebase = () => useContext(FirebaseContext);
 export const FirebaseProvider = ({ children }) => {
     const [userLogged, setUserLogged] = useState(null);
     const [fetchedData, setFetchedData] = useState(null);
-    const selectedId = [1749816806054, 12345678, 87654321, 9876543210];
+    const selectedId = [1749952569636, 1749888470514, 1749873482373, 9876543210];
     const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
     // Track auth state
@@ -182,7 +182,7 @@ export const FirebaseProvider = ({ children }) => {
             await updateDoc(userRef, {
                 claimedTime: serverTimestamp(),
                 streak: Number(userSnap.streak) + 1,
-                points: (Number(userSnap.points) + 1.2).toFixed(2)
+                points: Number((Number(userSnap.points) + 1.2).toFixed(2))
             });
             console.log("✅ Claimed time updated successfully");
         } catch (error) {

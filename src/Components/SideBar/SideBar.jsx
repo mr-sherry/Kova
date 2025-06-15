@@ -37,6 +37,8 @@ export default function Sidebar() {
                         <div className={styles.profileSectionInner}>
                             <h4>{firebase.fetchedData ? firebase.fetchedData.displayName : ''}</h4>
                             <p>💰 {firebase.fetchedData ? firebase.fetchedData.points : ''} pts</p>
+                            <NavLink className={styles.profile} onClick={() => setOpen(false)} to={'/profile'}>👨‍💼 Profile</NavLink>
+
                         </div>
 
 
@@ -59,15 +61,13 @@ export default function Sidebar() {
                             <NavLink onClick={() => setOpen(false)} to={'/'}>⚙️ Settings</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/leaderboard'}>🏆 Leaderboard</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/about'}>👨‍💼 About Us</NavLink>
-                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} to={'/'}>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/white-paper'} >📄 Whitepaper</NavLink>
                         </>
                     ) : (
                         <>
                             <NavLink onClick={() => setOpen(false)} to={'/'}>👨‍💼 About Us</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🏆 Leaderboard (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📄 Whitepaper (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} to={'/'}>⛏️ Mining Mechanism</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/white-paper'} >📄 Whitepaper (Soon)</NavLink>
                         </>
                     )}
                 </nav>

@@ -10,10 +10,24 @@ import FullPageLottieLoader from '../../Components/Animations/FullPageLottieLoad
 export default function Mining() {
     const [playLottie, setPlayLottie] = useState(false);
     const [showToast, setShowToast] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(0);
-    const [fetchedData, setFetchedData] = useState(null)
+    const [timeRemaining, setTimeRemaining] = useState(null);
+    const [fetchedData, setFetchedData] = useState(null);
+    const [claim, setClaim] = useState(true)
 
 
+    useEffect(() => {
+        if (typeof timeRemaining === "number" && timeRemaining < 1) {
+            setClaim(prev => {
+                if (prev === true) return false;
+                return prev;
+            });
+        } else {
+            setClaim(prev => {
+                if (prev === false) return true;
+                return prev;
+            });
+        }
+    }, [fetchedData, timeRemaining]);
 
     const navigate = useNavigate();
     const firebase = useFirebase();
@@ -23,7 +37,8 @@ export default function Mining() {
     const handleClaim = async () => {
         // Start Lottie animation
         setPlayLottie(true);
-        setShowToast(false); // Hide toast in case it's already visible
+        setShowToast(false);
+
         try {
             if (firebase.userLogged?.uid) {
                 await firebase.updateClaimedTime(firebase.userLogged.uid);
@@ -50,7 +65,7 @@ export default function Mining() {
     useEffect(() => {
         if (!firebase.userLogged) {
             navigate('/login')
-        } if (firebase.userLogged?.uid) {
+        } else if (firebase.userLogged?.uid) {
             const checkCooldown = async () => {
                 if (firebase.userLogged?.uid) {
                     const ms = await firebase.getClaimCooldown(firebase.userLogged.uid);
@@ -60,7 +75,6 @@ export default function Mining() {
             setInterval(() => {
                 checkCooldown();
             }, 1000);
-
         }
 
     }, [firebase.userLogged]);
@@ -106,10 +120,10 @@ export default function Mining() {
                 <button
                     className={`${styles.claimButton}`}
                     onClick={handleClaim}
-                    disabled={timeRemaining > 0}
+                    disabled={claim}
                 >
                     <>
-                        {timeRemaining > 0 ? 'Wait For Timer...' : 'Sync Now'}
+                        {claim ? 'Wait For Timer...' : 'Sync Now'}
                         <span className={styles.coinAnimation}>🪙</span>
                     </>
                 </button>
