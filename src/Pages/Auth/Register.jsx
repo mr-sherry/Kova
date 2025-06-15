@@ -21,7 +21,9 @@ export default function Register() {
     const selectedId = [1749816806054, 12345678, 87654321, 9876543210];
 
     const checkRefer = async (referCode) => {
-        const isValid = await firebase.checkReferralCodeExists(referCode);
+        console.log("🚀 ~ checkRefer ~ referCode:", typeof referCode)
+        const isValid = await firebase.checkReferralCodeExists(Number(referCode));
+        console.log("🚀 ~ checkRefer ~ isValid:", isValid)
 
         if (isValid) {
             console.log("✅ Referral code is valid");
