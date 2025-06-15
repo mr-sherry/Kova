@@ -20,7 +20,9 @@ import {
     collection,
     where,
     getDocs,
-    query
+    query,
+    orderBy,
+    limit
 } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -51,6 +53,7 @@ export const FirebaseProvider = ({ children }) => {
     const [fetchedData, setFetchedData] = useState(null);
     const selectedId = [1749952569636, 1749888470514, 1749873482373, 9876543210];
     const [isFirebaseReady, setIsFirebaseReady] = useState(false);
+    const [topUsers, setTopUsers] = useState([]);
 
     // Track auth state
     useEffect(() => {
@@ -220,11 +223,35 @@ export const FirebaseProvider = ({ children }) => {
         }
     };
 
+    // Top users get and sort
+
+    useEffect(() => {
+        const fetchTopUsers = async () => {
+            try {
+                const usersRef = collection(db, "users");
+                const q = query(usersRef, orderBy("points", "desc"), limit(10));
+                const querySnapshot = await getDocs(q);
+
+                const users = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+
+                setTopUsers(users);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+
+        fetchTopUsers();
+    }, []);
+
     // Values to share
     const contextValue = {
         userLogged,
         isFirebaseReady,
         fetchedData,
+        topUsers,
         signUp,
         login,
         logout,
