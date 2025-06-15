@@ -42,6 +42,7 @@
 .topThree {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
 }
@@ -51,6 +52,7 @@
   border-radius: 15px;
   padding: 10px;
   text-align: center;
+
   flex: 1;
 }
 
