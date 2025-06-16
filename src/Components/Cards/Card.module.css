@@ -10,7 +10,6 @@
   background-image: url(../assets/image.svg.jpg);
   background-size: 120% 100%;
   background-position: center;
-  /* filter: grayscale(100%); */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
@@ -99,7 +98,7 @@
 /* Media Queries for responsiveness */
 @media (max-width: 720px) {
   .maindiv {
-    width: 180px;
+    width: 200px;
     height: 220px;
   }
 }
@@ -107,7 +106,7 @@
 @media (max-width: 480px) {
   .maindiv {
     width: 100%;
-    max-width: 300px;
+    max-width: 180px;
   }
 
   .name {
