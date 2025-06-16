@@ -5,29 +5,42 @@ const Settings = () => {
     const [displayName, setDisplayName] = useState("Sherry");
     const [email, setEmail] = useState("sherry@example.com");
     const [password, setPassword] = useState("");
-    const [theme, setTheme] = useState("system");
-    const [profilePic, setProfilePic] = useState(null);
+    const [theme, setTheme] = useState("light");
+    // const [profilePic, setProfilePic] = useState(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-    const handleProfilePicChange = (e) => {
-        const file = e.target.files[0];
-        if (file) setProfilePic(URL.createObjectURL(file));
-    };
+    // const handleProfilePicChange = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file) setProfilePic(URL.createObjectURL(file));
+    // };
 
     return (
         <>
             <div className={styles.settingsContainer}>
-                {/* Theme */}
+                {/* Theme Toggle as Single Button */}
                 <div className={styles.settingItem1Main}>
                     <h1>Settings</h1>
-                    <div className={styles.settingItem1} >
-                        <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-                            <option value="light">Light</option>
-                            <option value="dark">Dark</option>
-                            <option value="system">System</option>
-                        </select>
-                    </div >
+                    {theme === 'light' ?
+                        <div className={styles.settingItemLight}>
+                            <button onClick={() => {
+                                const nextTheme = theme === "light" ? "dark" : "light";
+                                setTheme(nextTheme);
+                            }}>
+                                {theme.charAt(0).toUpperCase() + theme.slice(1)}
+                            </button>
+                        </div>
+                        :
+                        <div className={styles.settingItemDark}>
+                            <button onClick={() => {
+                                const nextTheme = theme === "light" ? "dark" : "light";
+                                setTheme(nextTheme);
+                            }}>
+                                {theme.charAt(0).toUpperCase() + theme.slice(1)}
+                            </button>
+                        </div>
+                    }
                 </div>
+
 
                 {/* Profile Picture */}
                 {/* <div className={styles.settingItem}>
