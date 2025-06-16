@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import QRCodeStyling from 'qr-code-styling';
 import styles from './Profile.module.css';
-import IconDark from '../../assests/IconDark.svg';
 
 export default function Profile({ onLogout }) {
     const [fetchData, setFetchData] = useState(null);
@@ -14,20 +13,19 @@ export default function Profile({ onLogout }) {
         width: 140,
         height: 140,
         data: referralLink,
-        image: IconDark,
         dotsOptions: {
             gradient: {
                 type: 'linear',
                 rotation: 90,
                 colorStops: [
-                    { offset: 0, color: 'black' },
-                    { offset: 1, color: '#7a7a7a' }
+                    { offset: 0, color: 'green' },
+                    { offset: 1, color: 'white' }
                 ]
             },
             type: 'dots',
         },
         backgroundOptions: {
-            color: '#ffffff',
+            color: 'black',
         },
         imageOptions: {
             crossOrigin: 'anonymous',

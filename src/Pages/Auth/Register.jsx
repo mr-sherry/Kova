@@ -21,9 +21,7 @@ export default function Register() {
     const selectedId = [1749816806054, 12345678, 87654321, 9876543210];
 
     const checkRefer = async (referCode) => {
-        console.log("🚀 ~ checkRefer ~ referCode:", typeof referCode)
         const isValid = await firebase.checkReferralCodeExists(Number(referCode));
-        console.log("🚀 ~ checkRefer ~ isValid:", isValid)
 
         if (isValid) {
             console.log("✅ Referral code is valid");
@@ -37,13 +35,10 @@ export default function Register() {
 
     useEffect(() => {
         if (referId) {
-            console.log("Referral ID:", referId);
             setRefer(referId);
         } else {
             const randomNum = Math.floor(Math.random() * 4);
-            console.log("🚀 ~ Register ~ selectedId:", typeof selectedId)
 
-            console.log("🚀 ~ useEffect ~ randomNum:", typeof randomNum)
             console.log(selectedId[randomNum]);
 
             setRefer(selectedId[randomNum])

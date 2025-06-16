@@ -31,6 +31,7 @@ export default function Mining() {
 
     const navigate = useNavigate();
     const firebase = useFirebase();
+
     // console.log("🚀 ~ Login ~ firebasefromining:", firebase.userLogged)
 
 
@@ -144,15 +145,15 @@ export default function Mining() {
                 <h3>🎁 Upcoming Rewards</h3>
                 <div className={styles.reward}>
                     <span>🪙 Bronze</span>
-                    <span>500 pts</span>
+                    <span>1.5x KP</span>
                 </div>
                 <div className={styles.reward}>
                     <span>💎 Silver</span>
-                    <span>1000 pts</span>
+                    <span>2x KP</span>
                 </div>
                 <div className={styles.reward}>
                     <span>🏆 Gold</span>
-                    <span>2500 pts</span>
+                    <span>3x KP</span>
                 </div>
             </div>
 
@@ -161,16 +162,16 @@ export default function Mining() {
                 <h3>🏆Leaderboard</h3>
                 <ul>
                     <li>
-                        <span className={styles.lbUser}>Alice</span>
-                        <span className={styles.lbPoints}>250 pts</span>
+                        <span className={styles.lbUser}>{firebase.topUsers[0].displayName}</span>
+                        <span className={styles.lbPoints}>{firebase.topUsers[0].points} KP</span>
                     </li>
                     <li>
-                        <span className={styles.lbUser}>Bob</span>
-                        <span className={styles.lbPoints}>200 pts</span>
+                        <span className={styles.lbUser}>{firebase.topUsers[1].displayName}</span>
+                        <span className={styles.lbPoints}>{firebase.topUsers[1].points} KP</span>
                     </li>
                     <li>
-                        <span className={styles.lbUser}>Charlie</span>
-                        <span className={styles.lbPoints}>180 pts</span>
+                        <span className={styles.lbUser}>{firebase.topUsers[2].displayName}</span>
+                        <span className={styles.lbPoints}>{firebase.topUsers[2].points} KP</span>
                     </li>
                 </ul>
                 <NavLink to={'/leaderboard'}>
