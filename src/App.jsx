@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Components/Header/Header'
 import { Outlet } from 'react-router-dom'
 import { FirebaseProvider, useFirebase } from './Context/UseFirebase';
@@ -33,6 +33,16 @@ const Layout = () => {
 
 
 function App() {
+    useEffect(() => {
+        const preventZoom = (e) => e.preventDefault();
+
+        // Block pinch & double-tap zoom on iOS Safari
+        document.addEventListener('gesturestart', preventZoom);
+
+        return () => {
+            document.removeEventListener('gesturestart', preventZoom);
+        };
+    }, []);
 
     return (
         <div>
