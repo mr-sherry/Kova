@@ -31,7 +31,7 @@ export default function Sidebar() {
                     {firebase.userLogged ? (<>
                         <img
                             className={styles.avatar}
-                            src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${firebase.fetchedData ? firebase.fetchedData.displayName : ''}`}
+                            src={`https://api.dicebear.com/7.x/fun-emoji/svg?seed=${firebase.fetchedData ? firebase.fetchedData.displayName : ''}`}
                             alt="User Avatar"
                         />
                         <div className={styles.profileSectionInner}>
@@ -58,7 +58,7 @@ export default function Sidebar() {
                             <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>📜 History (Soon)</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🎯 Streak (Soon)</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/'} className={styles.disabled}>🎁 Rewards (Soon)</NavLink>
-                            <NavLink onClick={() => setOpen(false)} to={'/'}>⚙️ Settings</NavLink>
+                            <NavLink onClick={() => setOpen(false)} to={'/settings'}>⚙️ Settings</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/leaderboard'}>🏆 Leaderboard</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/about'}>👨‍💼 About Us</NavLink>
                             <NavLink onClick={() => setOpen(false)} to={'/white-paper'} >📄 Whitepaper</NavLink>

@@ -1,26 +1,113 @@
-/* AboutPage.module.css */
-
-.wrapper {
-  min-height: 100vh;
-  background-color: #f9fafb;
-  padding: 4rem 1rem;
-}
-
-.heading {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 3rem;
-}
-
-.highlight {
-  color: #6366f1;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+.div {
+  background: #ffffff;
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  max-width: 1000px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
-  justify-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.techGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.techGrid span {
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.techGrid span:hover {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.mapContainer {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.mapPlaceholder {
+  margin-top: 1rem;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 16px;
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .div {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  .techGrid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }

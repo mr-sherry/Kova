@@ -10,6 +10,8 @@ import About from './Pages/About/About.jsx'
 import Whitepaper from './Pages/white-paper/Whitepaper.jsx'
 import Error from './Pages/Error-and-NotFound/Error.jsx'
 import NotFound from './Pages/Error-and-NotFound/NotFound.jsx'
+import Profile from './Pages/Profile/Profile.jsx'
+import Settings from './Pages/Settings/Settings.jsx'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +23,8 @@ const routes = createBrowserRouter(
       <Route path='register/ref/:referId' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='about' element={<About />} />
+      <Route path='profile' element={<Profile />} />
+      <Route path='settings' element={<Settings />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

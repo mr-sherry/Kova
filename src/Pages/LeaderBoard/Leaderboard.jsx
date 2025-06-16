@@ -48,7 +48,7 @@ export default function Leaderboard() {
                             src={
                                 user.photoURL
                                     ? user.photoURL
-                                    : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.uid}`
+                                    : `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${user.uid}`
                             }
                             alt={user.displayName || 'Anonymous'}
                         />
@@ -70,7 +70,7 @@ export default function Leaderboard() {
                                 src={
                                     user.photoURL
                                         ? user.photoURL
-                                        : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.uid}`
+                                        : `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${user.uid}`
                                 }
                                 alt={user.displayName || 'Anonymous'}
                             />

@@ -157,6 +157,8 @@ export const FirebaseProvider = ({ children }) => {
         return signOut(auth);
     };
 
+
+    // fetch user data 
     const fetchUserData = async (uid) => {
         try {
             const userRef = doc(db, "users", uid);
@@ -175,6 +177,11 @@ export const FirebaseProvider = ({ children }) => {
         }
     };
 
+    useEffect(() => {
+        if (userLogged?.uid) {
+            fetchUserData(userLogged.uid)
+        }
+    }, [isFirebaseReady])
 
     // update timestamp of claim on click
     const updateClaimedTime = async (uid) => {

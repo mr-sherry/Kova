@@ -1,0 +1,158 @@
+.settingsContainer {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.settingItem {
+  margin-bottom: 1.5rem;
+}
+.settingItem1 {
+  /* margin-bottom: 1.5rem; */
+  width: 23%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.settingItem1Main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.settingItem1Main h1 {
+  width: 65%;
+  text-align: right;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+input {
+  width: 95%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.profilePicWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profilePic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialBtn {
+  background-color: #eef2ff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.outlineBtn {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #aaa;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dangerZone {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 2px dashed #f87171;
+}
+
+.deleteBtn {
+  background-color: #f87171;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.confirmBox {
+  margin-top: 1rem;
+  background: #fff0f0;
+  padding: 1rem;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+}
+
+.confirmBtn {
+  background-color: #dc2626;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.cancelBtn {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 0.6rem 1.2rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.updateBtn {
+  padding: 10px 14px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.updateBtn:hover {
+  background-color: #646464;
+}
+.btnDiv {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 2px dashed #000000;
+}
